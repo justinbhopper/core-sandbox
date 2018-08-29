@@ -28,7 +28,7 @@ namespace Sandbox.Controllers
 		// GET api/v1/films
 		[HttpGet]
 		[ProducesResponseType(200, Type = typeof(IEnumerable<Film>))]
-		public async Task<ActionResult<IEnumerable<Film>>> GetAllAsync()
+		public async Task<IActionResult> GetAllAsync()
 		{
 			return Ok(await _context.Films.ToListAsync());
 		}
@@ -37,7 +37,7 @@ namespace Sandbox.Controllers
 		[HttpGet("{id}", Name = "GetFilm")]
 		[ProducesResponseType(200, Type = typeof(Film))]
 		[ProducesResponseType(404)]
-		public async Task<ActionResult<Film>> GetByIdAsync(long id)
+		public async Task<IActionResult> GetByIdAsync(long id)
 		{
 			var film = await _context.Films.FindAsync(id);
 			if (film == null)
@@ -49,7 +49,7 @@ namespace Sandbox.Controllers
 		[HttpPost]
 		[ProducesResponseType(201, Type = typeof(Film))]
 		[ProducesResponseType(400)]
-		public async Task<ActionResult<Film>> PostAsync([FromBody] Film film)
+		public async Task<IActionResult> PostAsync([FromBody] Film film)
 		{
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
@@ -64,7 +64,7 @@ namespace Sandbox.Controllers
 		[HttpPut("{id}")]
 		[ProducesResponseType(200, Type = typeof(Film))]
 		[ProducesResponseType(404)]
-		public async Task<ActionResult<Film>> PutAsync(long id, [FromBody] Film film)
+		public async Task<IActionResult> PutAsync(long id, [FromBody] Film film)
 		{
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);

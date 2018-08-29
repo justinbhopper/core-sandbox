@@ -10,8 +10,18 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="NSwag.CodeGeneration.TypeScript" Version="11.18.7" />
+		<PackageReference Include="NSwag.MSBuild" Version="11.18.7">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="3.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="3.0.0" />
 	</ItemGroup>
 
+	<Target Name="NSwag" AfterTargets="Build">
+		<Copy SourceFiles="@(ReferencePath)" DestinationFolder="$(OutDir)References" />
+		<Exec Command="$(NSwagExe_Core21) run nswag.json /variables:Configuration=$(Configuration)" />
+		<RemoveDir Directories="$(OutDir)References" />
+	</Target>
 </Project>
