@@ -49,7 +49,7 @@ namespace Sandbox.Controllers
 		[HttpPost]
 		[ProducesResponseType(201, Type = typeof(Film))]
 		[ProducesResponseType(400)]
-		public async Task<IActionResult> PostAsync([FromBody] Film film)
+		public async Task<IActionResult> InsertAsync([FromBody] Film film)
 		{
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
@@ -64,7 +64,7 @@ namespace Sandbox.Controllers
 		[HttpPut("{id}")]
 		[ProducesResponseType(200, Type = typeof(Film))]
 		[ProducesResponseType(404)]
-		public async Task<IActionResult> PutAsync(long id, [FromBody] Film film)
+		public async Task<IActionResult> UpdateAsync(long id, [FromBody] Film film)
 		{
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);

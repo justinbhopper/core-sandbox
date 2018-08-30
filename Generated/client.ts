@@ -9,7 +9,7 @@
 export class FilmsClient {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
-    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : <any>window;
@@ -55,7 +55,7 @@ export class FilmsClient {
         return Promise.resolve<Film[]>(<any>null);
     }
 
-    post(film: Film): Promise<Film> {
+    insert(film: Film): Promise<Film> {
         let url_ = this.baseUrl + "/api/v1/films";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -71,18 +71,18 @@ export class FilmsClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPost(_response);
+            return this.processInsert(_response);
         });
     }
 
-    protected processPost(response: Response): Promise<Film> {
+    protected processInsert(response: Response): Promise<Film> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 201) {
             return response.text().then((_responseText) => {
             let result201: any = null;
             let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = resultData201 ? Film.fromJS(resultData201) : <any>null;
+            result201 = resultData201 ? Film.fromJS(resultData201) : new Film();
             return result201;
             });
         } else if (status === 400) {
@@ -124,7 +124,7 @@ export class FilmsClient {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? Film.fromJS(resultData200) : <any>null;
+            result200 = resultData200 ? Film.fromJS(resultData200) : new Film();
             return result200;
             });
         } else if (status === 404) {
@@ -139,7 +139,7 @@ export class FilmsClient {
         return Promise.resolve<Film>(<any>null);
     }
 
-    put(id: number, film: Film): Promise<Film> {
+    update(id: number, film: Film): Promise<Film> {
         let url_ = this.baseUrl + "/api/v1/films/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -158,18 +158,18 @@ export class FilmsClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPut(_response);
+            return this.processUpdate(_response);
         });
     }
 
-    protected processPut(response: Response): Promise<Film> {
+    protected processUpdate(response: Response): Promise<Film> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? Film.fromJS(resultData200) : <any>null;
+            result200 = resultData200 ? Film.fromJS(resultData200) : new Film();
             return result200;
             });
         } else if (status === 404) {
@@ -224,10 +224,10 @@ export class FilmsClient {
 }
 
 export class Film implements IFilm {
-    id: number;
-    title: string;
-    year: number;
-    rank: number;
+    id!: number;
+    title!: string;
+    year!: number;
+    rank!: number;
 
     constructor(data?: IFilm) {
         if (data) {

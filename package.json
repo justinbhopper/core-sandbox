@@ -1,0 +1,21 @@
+{
+	"name": "@tehsolace/core-sandbox",
+	"version": "0.2.0",
+	"private": false,
+	"dependencies": {},
+	"scripts": {},
+	"devDependencies": {
+		"typescript": "^2.9.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tehsolace/core-sandbox.git"
+	},
+	"author": "Justin Hopper",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/tehsolace/core-sandbox/issues"
+	},
+	"homepage": "https://github.com/tehsolace/core-sandbox#readme",
+	"description": ""
+}
