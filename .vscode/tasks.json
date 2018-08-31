@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/core-sandbox.csproj"
+                "${workspaceFolder}/src/Sandbox.Api/Sandbox.Api.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

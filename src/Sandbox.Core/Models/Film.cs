@@ -1,4 +1,4 @@
-namespace Sandbox.Models
+namespace Sandbox.Core.Models
 {
 	public class Film
 	{

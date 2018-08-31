@@ -4,6 +4,7 @@
 	"private": false,
 	"dependencies": {},
 	"scripts": {},
+	"main": "src/generated/client.ts",
 	"devDependencies": {
 		"typescript": "^2.9.2"
 	},
@@ -17,5 +18,5 @@
 		"url": "https://github.com/tehsolace/core-sandbox/issues"
 	},
 	"homepage": "https://github.com/tehsolace/core-sandbox#readme",
-	"description": ""
+	"description": ".Net core sandbox"
 }

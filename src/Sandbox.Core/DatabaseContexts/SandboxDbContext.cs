@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using Sandbox.Core.Models;
 
-namespace Sandbox.Models
+namespace Sandbox.Core
 {
 	public class SandboxDbContext : DbContext
 	{
-		public SandboxDbContext(DbContextOptions<SandboxDbContext> options)
+		public SandboxDbContext(DbContextOptions options)
 			: base(options) { }
 
 		public DbSet<Film> Films { get; set; }

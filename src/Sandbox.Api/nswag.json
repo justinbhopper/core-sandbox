@@ -34,7 +34,7 @@
 			"output": null,
 			"outputType": "Swagger2",
 			"assemblyPaths": [
-				"bin/$(Configuration)/netcoreapp2.1/core-sandbox.dll"
+				"bin/$(Configuration)/netcoreapp2.1/Sandbox.Api.dll"
 			],
 			"assemblyConfig": null,
 			"referencePaths": [
@@ -87,7 +87,7 @@
 			"enumNameGeneratorType": null,
 			"serviceHost": null,
 			"serviceSchemes": null,
-			"output": "Generated/client.ts"
+			"output": "../generated/client.ts"
 		}
 	}
 }
