@@ -39,6 +39,10 @@ namespace Sandbox.Api
 			var builder = new ContainerBuilder();
 			
 			builder.Populate(services);
+
+			builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
+				.Where(t => t.Name.EndsWith("Service"))
+				.AsImplementedInterfaces();
 			
 			return new AutofacServiceProvider(builder.Build());
 		}
