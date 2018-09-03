@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sandbox.Core
+namespace Sandbox.Data
 {
 	public class ResourceNotFoundException : Exception
 	{

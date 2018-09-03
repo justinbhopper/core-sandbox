@@ -2,8 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Sandbox.Core;
-using Sandbox.Core.Models;
+using Sandbox.Data;
+using Sandbox.Data.Models;
 using Sandbox.Core.Services;
 
 namespace Sandbox.Controllers
@@ -21,7 +21,7 @@ namespace Sandbox.Controllers
 
 		// GET api/v1/films
 		[HttpGet]
-		[ProducesResponseType(200, Type = typeof(IEnumerable<Film>))]
+		[ProducesResponseType(200, Type = typeof(IList<Film>))]
 		public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
 		{
 			return Ok(await _filmsService.GetAllAsync(cancellationToken));
@@ -33,7 +33,7 @@ namespace Sandbox.Controllers
 		[ProducesResponseType(404)]
 		public async Task<IActionResult> GetByIdAsync(long id, CancellationToken cancellationToken)
 		{
-			var film = await _filmsService.GetByIdAsync(id, cancellationToken);
+			var film = await _filmsService.GetAsync(id, cancellationToken);
 			if (film == null)
 				return NotFound();
 			return Ok(film);
@@ -51,7 +51,7 @@ namespace Sandbox.Controllers
 			if (film == null)
 				return BadRequest();
 
-			await _filmsService.AddAsync(film, cancellationToken);
+			film = await _filmsService.AddAsync(film, cancellationToken);
 
 			return CreatedAtRoute("GetFilm", new { id = film.Id }, film);
 		}
@@ -88,7 +88,7 @@ namespace Sandbox.Controllers
 		[ProducesResponseType(404)]
 		public async Task<IActionResult> DeleteAsync(int id, CancellationToken cancellationToken)
 		{
-			var existing = await _filmsService.GetByIdAsync(id, cancellationToken);
+			var existing = await _filmsService.GetAsync(id, cancellationToken);
 			if (existing == null)
 				return NotFound();
 

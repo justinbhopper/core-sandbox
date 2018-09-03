@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Sandbox.Core.Models;
+using Sandbox.Data.Models;
 
-namespace Sandbox.Core
+namespace Sandbox.Data
 {
 	public class SandboxDbContext : DbContext
 	{

@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Sandbox.Core;
+using Sandbox.Core.Services;
+using Sandbox.Data;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Sandbox.Api
@@ -40,9 +41,18 @@ namespace Sandbox.Api
 			
 			builder.Populate(services);
 
-			builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
+			var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+			builder.RegisterAssemblyTypes(assemblies)
 				.Where(t => t.Name.EndsWith("Service"))
 				.AsImplementedInterfaces();
+
+			// TODO: figure out why the above assembly registration isn't registering IFilmService
+			builder.RegisterType<FilmService>().As<IFilmService>();
+			builder.RegisterType<SandboxDbContext>().As<DbContext>();
+
+			builder.RegisterGeneric(typeof(EntityFrameworkReadOnlyRepository<,>)).As(typeof(IReadOnlyRepository<,>));
+			builder.RegisterGeneric(typeof(EntityFrameworkRepository<,>)).As(typeof(IRepository<,>));
 			
 			return new AutofacServiceProvider(builder.Build());
 		}
