@@ -1,5 +1,5 @@
 {
-	"name": "@tehsolace/core-sandbox",
+	"name": "@justinbhopper/core-sandbox",
 	"version": "0.2.0",
 	"private": false,
 	"dependencies": {},
@@ -10,13 +10,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/tehsolace/core-sandbox.git"
+		"url": "git+https://github.com/justinbhopper/core-sandbox.git"
 	},
 	"author": "Justin Hopper",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/tehsolace/core-sandbox/issues"
+		"url": "https://github.com/justinbhopper/core-sandbox/issues"
 	},
-	"homepage": "https://github.com/tehsolace/core-sandbox#readme",
+	"homepage": "https://github.com/justinbhopper/core-sandbox#readme",
 	"description": ".Net core sandbox"
 }
